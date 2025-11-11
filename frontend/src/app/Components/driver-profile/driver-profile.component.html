@@ -1,0 +1,65 @@
+<body class="bg-gradient-to-b from-slate-400 to-slate-600">
+  <div class="min-h-screen  flex items-center justify-center px-4 py-10">
+  <mat-card class="w-full max-w-md shadow-lg !bg-gradient-to-b !from-slate-300 !to-slate-400">
+    <mat-card-header class="!items-center !justify-center">
+      <mat-card-title class="!text-3xl !font-semibold  ">
+        <div class="flex justify-center underline">
+         Profile
+       </div>
+      </mat-card-title>
+      <mat-card-subtitle class="!text-black-500 !mt-2 !text-2xl">
+        Personal Information
+      </mat-card-subtitle>
+    </mat-card-header>
+
+    <mat-card-content class="!space-y-4 !mt-4 !text-black !text-xl">
+      <div class="flex flex-row">
+        <strong>Name : </strong>
+        <p>{{ driver.drivername }}</p>
+      </div>
+      <div class="flex flex-row">
+        <strong>Email : </strong>
+        <p>{{ driver.email }}</p>
+      </div>
+      <div class="flex flex-row">
+        <strong>Mobile Number : </strong>
+        <p>{{ driver.mobile_no }}</p>
+      </div>
+      <div class="flex flex-row">
+        <strong>Status : </strong>
+        @if(driver.status==='PENDING_VERIFICATION'){
+        <p class="text-red-600">{{ driver.status }}</p>
+        }
+        @else{
+          <p class="text-green-600">{{ driver.status }}</p>
+        }
+      </div>
+     
+      <div class="flex flex-row">
+        <strong>License Number : </strong>
+        <p>{{ driver.license_no }}</p>
+      </div>
+
+       <div class="flex flex-row">
+        <strong>Vehicle Number : </strong>
+        <p>{{ driver.vehicle_no }}</p>
+      </div>
+       <div class="flex flex-row">
+        <strong>Vehicle Type : </strong>
+        <p>{{ driver.vehicle_type }}</p>
+      </div>
+    </mat-card-content>
+
+    <mat-card-actions class="mt-6">
+      <div class="pb-4 flex gap-28">
+      <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl "><span class="text-red-600 text-xl"><<</span>Back</button>
+      <button mat-raised-button color="primary" class="">
+        Edit Profile
+      </button>
+  </div>
+      
+    </mat-card-actions>
+  </mat-card>
+</div>
+
+</body>

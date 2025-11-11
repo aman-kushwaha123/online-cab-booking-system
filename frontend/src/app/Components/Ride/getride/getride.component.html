@@ -1,0 +1,63 @@
+<div class="grid sm:grid-cols-1 lg:grid-cols-3 grid-cols-2 items-start flex">
+  <div class="p-4 w-full  justify-center items-center ">
+    <mat-card class="shadow-lg rounded-lg w-full max-w-sm sm:max-w-md lg:max-w-xl">
+      <mat-card-header>
+        <mat-card-title>
+          <h1 class="text-xl font-semibold">Get Ride</h1>
+        </mat-card-title>
+      </mat-card-header>
+
+      <form class="px-4" [formGroup]="routeform" (ngSubmit)="showRoute()">
+        <div class="mb-4 relative">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Pickup location</mat-label>
+            <mat-icon matPrefix>location_on</mat-icon>
+            <input matInput placeholder="Enter Location" formControlName="pickup" id="pickup"  (input)="searchPlace('pickup')"/>
+        </mat-form-field>
+         <ul *ngIf="pickupResults.length" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+              <li *ngFor="let p of pickupResults" (click)="selectPlace('pickup', p) " class="px-4 py-2 hover:bg-blue-100 cursor-pointer">
+                {{p.display_name}}
+              </li>
+            </ul>
+        </div>
+
+        <div class="mb-4 relative">
+          <mat-form-field appearance="fill" class="w-full">
+            <mat-label>Destination</mat-label>
+            <mat-icon matPrefix>place</mat-icon>
+            <input matInput placeholder="Enter Location" id="destination" formControlName="destination"  (input)="searchPlace('destination')"/>
+          </mat-form-field>
+          <ul *ngIf="destResults.length" class="absolute z-10 w-full mt-1 bg-white border border-gray-300 rounded-md shadow-lg">
+              <li *ngFor="let d of destResults" (click)="selectPlace('destination', d)" class="px-4 py-2 hover:bg-blue-100 cursor-pointer">
+                {{d.display_name}}
+              </li>
+            </ul>
+        </div>
+
+        <div class="mb-4">
+          <button type="button"
+            class="w-full flex justify-between items-center bg-black text-white rounded px-4 py-2 border hover:bg-gray-800 transition"
+            (click)="openDialog()">
+            <span class="flex items-center gap-2 text-base">
+              <mat-icon class="text-white">schedule</mat-icon>
+              Pickup now
+            </span>
+            <mat-icon class="text-white">arrow_drop_down</mat-icon>
+          </button>
+        </div>
+
+        <div class="flex justify-center m-3">
+          <button mat-raised-button type="submit" class="w-full !bg-black !text-white">Search </button>
+        </div>
+
+      </form>
+    </mat-card>
+  </div>
+
+  <div class="p-4 w-fulloverflow-y-auto">
+    <app-chooseride [pickuplocation]="pickuplocation" [droplocation]="droplocation" ></app-chooseride>
+  </div>
+
+  <div id="map" class="p-4 w-full h-[500px] lg:h-full overflow-hidden rounded shadow bg-white"></div>
+
+</div>

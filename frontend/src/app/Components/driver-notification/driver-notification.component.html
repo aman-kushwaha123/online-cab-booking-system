@@ -1,0 +1,46 @@
+<div class="flex p-6 w-full overflow-y-auto justify-center min-h-screen p-4">
+  <div class="flex flex-col h-6/12 w-6/12 gap-3 text-black">
+    <div class="flex justify-center">
+      <p class="text-3xl font-semibold ">Notification</p>
+    </div>
+    <div class="pb-4">
+      <div class="">
+        <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl"><span class="text-red-600 text-xl"><<</span>Back</button>
+      </div>
+  </div>
+    <div *ngIf="bookings.length === 0" class="flex justify-center">
+     <p class="text-2xl underline text-red-400 ">No Bookings</p>
+    </div>
+    @if(bookings.length>0){
+    <mat-card class="p-4 shadow-gray-400 shadow-sm rounded-sm" *ngFor="let booking of bookings">
+      <div class="flex flex-col gap-3 text-lg">
+        <p class="text-gray-800 text-lg font-semibold"><strong>Username :</strong>{{booking.user.username}}</p>
+        <p class="text-gray-800 text-lg font-semibold"><strong>email :</strong>{{booking.user.email}} </p>
+        <p class="text-gray-800 text-lg font-semibold"><strong>Mobile No :</strong>{{booking.user.mobile_no}} </p>
+        <p><strong>Booking Date:</strong> {{ booking.booking_date_time | date:'mediumDate'}}</p>
+        <p><strong>Booking Time:</strong> {{ booking.booking_date_time | date:'shortTime'}}</p>
+        <p><strong>Pickup:</strong> {{ booking.pickupLocation }}</p>
+        <p><strong>Drop:</strong> {{ booking.dropLocation }}</p>
+        <p><strong>Pickup Date:</strong> {{ booking.pickup_date_time | date:'mediumDate' }}</p>
+        <p><strong>Pickup Time:</strong> {{ booking.pickup_date_time | date:'shortTime' }}</p>
+        <p><strong>dropoff Date:</strong> {{ booking.dropoff_date_time | date:'mediumDate' }}</p>
+        <p><strong>dropoff Time:</strong> {{ booking.dropoff_date_time | date:'shortTime' }}</p>
+  
+        <div class="mt-4 sm:mt-0 flex gap-2 justify-end">
+          <button *ngIf="booking.status=='PENDING'" mat-raised-button
+            class="!bg-red-600 !w-40 !h-10 !rounded-md !text-xl !font-semibold" (click)="accept(booking.id)">
+            Accept
+          </button>
+        </div>
+      </div>
+    </mat-card>
+    }
+  </div>
+
+
+
+
+
+
+
+</div>

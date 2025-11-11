@@ -1,0 +1,131 @@
+
+<div class="flex justify-center min-h-screen bg-slate-400">
+  <div class=" flex p-8 rounded w-full sm:w-6/12 justify-center items-center">
+  <mat-card class="w-full sm:w-6/12 shadow-lg  rounded-lg bg-gradient-to-l from-slate-400  to-gray-200 backdrop-blur">
+    <div class="w-full">
+    <mat-card-header class=" flex justify-center mb-4 ">
+      <mat-card-title class="text-2xl font-bold text-gray-800">Driver Register</mat-card-title>
+    </mat-card-header>
+    </div>
+
+    <mat-card-content class="p-6">
+      <form class="flex flex-col gap-4" action="#" method="POST" [formGroup]="registerform">
+         <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full ">
+          <mat-label>Drivername</mat-label>
+          <input matInput formControlName="drivername" class="" maxlength="15" required>
+          <mat-error *ngIf="registerform.get('drivername')?.hasError('drivername')">
+            Username is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('drivername')?.hasError('minlength')">
+            drivername must be at least 5 characters.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('drivername')?.hasError('pattern')">
+            drivername must be characters.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+
+       <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput formControlName="email" required>
+          <mat-error  *ngIf="registerform.get('email')?.hasError('required')">
+            Email is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('email')?.hasError('email')">
+            Please enter a valid email.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+         <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Licence Number</mat-label>
+          <input matInput formControlName="license_no" maxlength="16" required>
+          <mat-error  *ngIf="registerform.get('license_no')?.hasError('required')">
+            License Number is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('license_no')?.hasError('minLength')">
+             License Number must be at least 10 digits.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('license_no')?.hasError('numberOnly')">
+             License Number must be Numbers.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+         <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Vehicle Number</mat-label>
+          <input matInput formControlName="vehicle_no" maxlength="10" required>
+          <mat-error  *ngIf="registerform.get('vehicle_no')?.hasError('required')">
+            Vehicle Number is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('vehicle_no')?.hasError('minLength')">
+             Vehicle Number must be 10.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Mobile Number</mat-label>
+          <input matInput formControlName="mobile_no" maxlength="10" required>
+          <mat-error  *ngIf="registerform.get('mobile_no')?.hasError('required')">
+            Mobile Number is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('mobile_no')?.hasError('minLength')">
+            Mobile Number must be 10 Digits.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('mobile_no')?.hasError('numberOnly')">
+             Mobile Number must be Numbers.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+        <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Vehicle Type</mat-label>
+          <input matInput formControlName="vehicle_type" maxlength="10" required>
+          <mat-error  *ngIf="registerform.get('vehicle_type')?.hasError('required')">
+           Vehicle Type is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('vehicle_type')?.hasError('minLength')">
+            vehicle_type must be at least 5 characters.
+          </mat-error>
+        </mat-form-field>
+        </div>
+
+
+        <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Password</mat-label>
+          <input matInput formControlName="password" type="password" maxlength="15" required>
+          <mat-error  *ngIf="registerform.get('password')?.hasError('required')">
+            Password is required.
+          </mat-error>
+          <mat-error  *ngIf="registerform.get('password')?.hasError('minlength')">
+            Password must be at least 5 characters.
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <div class="pb-4">
+      <div class="">
+        <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl"><span class="text-red-600 text-xl"><<</span>Back</button>
+      </div>
+  </div>
+
+        <button mat-raised-button color="primary" type="submit"   (click)="register()"  class=" py-2 hover:bg-blue-700" [disabled]="registerform.invalid">
+          Register
+        </button>
+        <div>
+          <a routerLink="/driver/login" class="hover:underline cursor-pointer">Login?</a>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>

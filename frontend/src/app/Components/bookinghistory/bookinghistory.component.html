@@ -1,0 +1,63 @@
+<body class="w-full h-full bg-gradient-to-b from-slate-400 to-slate-600">
+
+  <div class="min-h-screen flex flex-col items-center">
+    <div class="w-full max-w-screen-md m-4 px-4">
+
+      <div class="flex flex-col gap-5 pb-24 overflow"> <!-- padding-bottom prevents footer overlap -->
+
+        <div class="text-center">
+          <h2 class="text-3xl font-semibold mb-4 underline mt-2">Your Bookings</h2>
+        </div>
+        <div class="pb-4">
+      <div class="">
+        <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl "><span class="text-red-600 text-xl"><<</span>Back</button>
+      </div>
+  </div>
+
+        <mat-card *ngFor="let booking of bookings" class="shadow-sm border border-gray-100 !bg-slate-200" >
+          <mat-card-header>
+            <div mat-card-avatar
+              class="bg-blue-500 text-white rounded-full w-10 h-10 flex items-center justify-center font-semibold">
+              {{ booking.ride[0] }}
+            </div>
+            <mat-card-title>
+              Booking ID : #{{ booking.id }}
+            </mat-card-title>
+            <mat-card-subtitle class="ml-auto font-semibold text-sm "
+              [ngClass]="{
+                'text-green-600': booking.status === 'ACCEPTED',
+                'text-yellow-600': booking.status === 'PENDING'
+              }">
+              @if(booking.status=='PENDING'){
+              <div class="flex flex-row">
+                <Strong>Status :</Strong><p class="text-red-600"> {{ booking.status }}</p>
+              </div>
+              }@else {
+                <div class="flex flex-row">
+                  <Strong>Status :</Strong><p class="text-green-600"> {{ booking.status }}</p>
+                </div>
+              }
+            </mat-card-subtitle>
+          </mat-card-header>
+
+          <mat-card-content class="text-sm !text-black px-6 py-4 space-y-1 ">
+            <p><strong>Booking Date:</strong> {{ booking.booking_date_time | date:'mediumDate'}}</p>
+            <p><strong>Booking Time:</strong> {{ booking.booking_date_time | date:'shortTime'}}</p>
+            <p><strong>Pickup:</strong> {{ booking.pickupLocation }}</p>
+            <p><strong>Drop:</strong> {{ booking.dropLocation }}</p>
+            <p><strong>Driver Name:</strong> {{ booking.driver?.drivername }}</p>
+            <p><strong>Driver Mobile Number:</strong> {{ booking.driver?.mobile_no }}</p>
+            <p><strong>Pickup Date:</strong> {{ booking.pickup_date_time | date:'mediumDate' }}</p>
+            <p><strong>Pickup Time:</strong> {{ booking.pickup_date_time | date:'shortTime' }}</p>
+            <p><strong>dropoff Date:</strong> {{ booking.dropoff_date_time | date:'mediumDate' }}</p>
+            <p><strong>dropoff Time:</strong> {{ booking.dropoff_date_time | date:'shortTime' }}</p>
+            <p><strong>Vehicle:</strong> {{ booking.ride }}</p>
+            <p class="text-green-600"><strong class="text-black">Price:</strong> {{ booking.price }}</p>
+          </mat-card-content>
+        </mat-card>
+
+      </div>
+    </div>
+  </div>
+
+</body>

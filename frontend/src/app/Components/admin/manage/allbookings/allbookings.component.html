@@ -1,0 +1,127 @@
+<body class="w-full h-full">
+  <div class="px-40 mt-20 min-h-screen">
+  <div class="m-4 flex justify-center">
+        <h1 class="text-3xl font-bold underline ">All Bookings</h1>
+  </div>
+  <div class="pb-4">
+      <div class="">
+        <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl"><span class="text-red-600 text-xl"><<</span>Back</button>
+      </div>
+  </div>
+  <mat-form-field class="w-full">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="search" class="" #input>
+</mat-form-field>
+
+<div class="mat-elevation-z8 overflow-x-auto">
+  @if(!isbookingsempty){
+  <table mat-table [dataSource]="dataSource" class="table-fixed" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="booking_date_time">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Booking DateTime </th>
+      <td mat-cell *matCellDef="let row"> 
+        <div class="flex flex-col ">
+          <p>Date : {{row.booking_date_time?.slice(0,15)}}</p>
+          <p>Time : {{row.booking_date_time?.slice(16)}}</p>
+        </div>
+      </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+
+    <ng-container matColumnDef="pickuplocation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Pickup Location </th>
+      <td mat-cell *matCellDef="let row"> {{row.pickupLocation}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="droplocation">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Drop Location </th>
+      <td mat-cell *matCellDef="let row"> {{row.dropLocation}} </td>
+    </ng-container>
+
+     
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+      <td mat-cell *matCellDef="let row"> {{row.status}}</td>
+    </ng-container>
+
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="driverid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Driver id </th>
+      <td mat-cell *matCellDef="let row"> {{row.driverid}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="userid">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> User id </th>
+      <td mat-cell *matCellDef="let row"> {{row.user.id}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="price">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Price </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="flex flex-col p-2">
+            <p>₹{{row.price}}</p>
+          </div>
+        </td>
+    </ng-container>
+
+    <ng-container matColumnDef="ride">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Ride </th>
+      <td mat-cell *matCellDef="let row"> {{row.ride}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="pickup_date_time">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Pickup Date and Time </th>
+      <td mat-cell *matCellDef="let row">
+        <div class="flex flex-col ">
+          <p>Date : {{row.pickup_date_time?.slice(0,15)}}</p>
+          <p>Time : {{row.pickup_date_time?.slice(16)}}</p>
+        </div>
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="dropoff_date_time">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Pickup Date and Time </th>
+      <td mat-cell *matCellDef="let row"> 
+        <div class="flex flex-col ">
+          <p>Date : {{row.dropoff_date_time?.slice(0,15)}}</p>
+          <p>Time : {{row.dropoff_date_time?.slice(16)}}</p>
+        </div>
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="action">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Action</th>
+      <td mat-cell *matCellDef="let row"> 
+        <div class="flex flex-col ">
+         <button mat-raised-button color="accent" class="mr-4" (click)="remove(row.id)" >Remove</button>
+        </div>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+  }
+  @else {
+    <p class="text-2xl font-semibold">No Bookings</p>
+  }
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>
+
+</div>
+
+</body>
+

@@ -1,0 +1,46 @@
+<mat-card class="flex justify-center items-center m-4 shadow-md shadow-orange-200">
+  <form>
+    <div class="p-4">
+      <h1 class="text-xl font-semibold mb-2 ">
+        When do you want to be picked up?
+      </h1>
+      <p>From {{ matdata.from }}</p>
+    </div>
+
+
+    <div class="flex justify-center w-full ">
+      <mat-button-toggle-group [(ngModel)]="selectedOption" name="selectedOption" (change)="onToggleChange()"
+        class="!rounded-xl !border-black w-[90%]">
+        <mat-button-toggle value="pickup" class="w-6/12 px-4 py-2 border border-black bg-gray-400 text-black "
+          disableRipple>
+          Pickup at
+        </mat-button-toggle>
+
+        <mat-button-toggle value="dropoff"
+          class="w-6/12 px-4 py-2 border border-black bg-white text-black hover:bg-cyan-50" disableRipple>
+          Dropoff by
+        </mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    <div class="flex justify-center w-full">
+      <mat-form-field class="w-[90%] m-4 ">
+        <mat-label class="text-black">Choose a date</mat-label>
+        <input matInput [matDatepicker]="picker" placeholder="Today" [(ngModel)]="selectedDate"
+          class="!text-black  !placeholder-black" name="selectedDate">
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+    </div>
+    <div class="flex justify-center w-full">
+      <mat-form-field appearance="fill"  class="w-[90%] m-4">
+        <mat-label>Choose time</mat-label>
+        <input matInput type="time" [(ngModel)]="selectedTime" name="selectedTime" />
+      </mat-form-field>
+    </div>
+    <div class="flex justify-around space-x-2 w-full mb-3">
+      <button mat-raised-button color="warn" class="!w-40 !h-11" (click)="canceldialog()">Cancel</button>
+      <button mat-raised-button class="!w-40 !h-11" (click)="closedialog()">Done</button>
+    </div>
+
+  </form>
+</mat-card>

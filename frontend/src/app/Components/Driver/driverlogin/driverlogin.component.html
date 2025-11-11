@@ -1,0 +1,60 @@
+
+
+  <div class="flex justify-center min-h-screen bg-slate-400">
+  <div class=" flex p-8 rounded w-full sm:w-6/12 justify-center items-center">
+  <mat-card class="w-full sm:w-6/12 shadow-lg  rounded-lg bg-gradient-to-l from-slate-400  to-gray-200 backdrop-blur">
+    <div class="w-full">
+    <mat-card-header class=" flex justify-center mb-4 ">
+      <mat-card-title class="text-2xl font-bold text-gray-800">Driver Login</mat-card-title>
+    </mat-card-header>
+    </div>
+
+    <mat-card-content class="p-6">
+      <form class="flex flex-col gap-4" action="#" method="POST" [formGroup]="loginform">
+         <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full ">
+          <mat-label>Drivername</mat-label>
+          <input matInput formControlName="drivername"  maxlength="15" required>
+          <mat-error *ngIf="loginform.get('drivername')?.hasError('drivername')">
+            Drivername is required.
+          </mat-error>
+          <mat-error  *ngIf="loginform.get('drivername')?.hasError('minlength')">
+            Drivername must be at least 5 characters.
+          </mat-error>
+          <mat-error  *ngIf="loginform.get('drivername')?.hasError('pattern')">
+            Drivername must be characters.
+          </mat-error>
+        </mat-form-field>
+        </div>
+        
+        <div class="w-full">
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Password</mat-label>
+          <input matInput type="password" formControlName="password" maxlength="15" required>
+          <mat-error  *ngIf="loginform.get('password')?.hasError('required')">
+            Password is required.
+          </mat-error>
+          <mat-error  *ngIf="loginform.get('password')?.hasError('minlength')">
+            Password must be at least 5 characters.
+          </mat-error>
+        </mat-form-field>
+        </div>
+        <div class="pb-4">
+      <div class="">
+        <button mat-raised-button (click)="backbuttonService.goback()" class="!text-black !w-28 !p-3 !text-xl !w-full"><span class="text-red-600 text-xl"><<</span>Back</button>
+      </div>
+  </div>
+
+        <button mat-raised-button color="primary" type="submit"   (click)="login()"  class=" py-2 hover:bg-blue-700" [disabled]="loginform.invalid">
+          Login
+        </button>
+        <div>
+          <a routerLink="/driver/register" class="hover:underline cursor-pointer">Create new Account?</a>
+        </div>
+
+      </form>
+    </mat-card-content>
+  </mat-card>
+</div>
+</div>
+

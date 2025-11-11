@@ -1,0 +1,39 @@
+<div class="p-6 bg-white min-h-screen flex items-center justify-center">
+  <div class="w-full max-w-sm sm:max-w-md lg:max-w-xl bg-white  rounded-lg p-6 md:p-8 border-black border-2">
+    <h2 class="text-3xl font-bold text-gray-800 mb-6 text-center">Choose Your Ride</h2>
+
+    <div class="flex flex-col gap-5 h-[75h]  w-full ">
+      <mat-card *ngFor="let vehicle of vehicleTypes" (click)="selectVehicle(vehicle)"
+      [ngClass]="{
+      '!border-2 !border-black scale-105': selectedVehicle === vehicle,
+      'scale-100': selectedVehicle !== vehicle  }"
+   class="box vehicle-card cursor-pointer  transform transition-transform duration-300 shadow-gray-400 hover:scale-105 ">
+        <mat-card-content class="flex flex-col p-4">
+          <div class="flex items-center justify-between w-full">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 flex items-center justify-center">
+                <img [src]="vehicle.img" [alt]="vehicle.name" class="max-w-full max-h-full object-contain">
+              </div>
+              <div class="text-lg font-semibold text-gray-700">{{ vehicle.name }}</div>
+            </div>
+            <div class="text-xl font-bold text-green-600">{{ vehicle.price }}</div>
+          </div>
+          <p class="text-sm text-gray-500 mt-2">{{ vehicle.description }}</p>
+        </mat-card-content>
+      </mat-card>
+    </div>
+  </div>
+</div>
+@if(this.pickup_date_time && this.dropoff_date_time){
+   <div class="m-4">
+        <button mat-raised-button class="" *ngIf="selectedVehicle"
+        class="mt-8 w-full text-center p-4 bg-black rounded text-white text-xl"
+        (click)="book()"
+        >Book Now</button>
+    </div>
+}
+
+<!--[ngClass]="{
+          'border-blue-500 ring-4 ring-blue-200': selectedVehicle && selectedVehicle.name === vehicle.name,
+          'border-transparent': !(selectedVehicle && selectedVehicle.name === vehicle.name)
+        }"-->

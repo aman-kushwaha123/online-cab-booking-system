@@ -1,0 +1,46 @@
+<body class="w-full h-full">
+<div class="min-h-screen bg-gradient-to-b from-slate-400 to-slate-700 flex justify-center items-center">
+  <div class="h-full flex items-center justify-center bg-transparent  p-6">
+    <div class="flex flex-col flex-col-reverse lg:flex-row  items-center justify-between w-full max-w-6xl gap-12 ">
+
+      <!-- 📄 Left / Center Content -->
+      <div class="text-center lg:text-left space-y-6 flex-1">
+        <h1 class="text-4xl font-bold  ">
+          Welcome to AKGo 🚖
+        </h1>
+        <p class="text-lg text-black">
+          Book your cab instantly with real-time tracking and 24/7 support. Whether you're headed to
+          work, a party, or the airport -AKGo gets you there.
+        </p>
+        @if(!authService.isDriver){
+        <button mat-raised-button color="primary" routerLink="/getride" class="w-80 !h-11 !bg-black !text-white">
+          Book a Ride
+        </button>
+      }
+      
+       @if(authService.isDriver && authService.isdriverApproved){
+        <button mat-raised-button color="primary" routerLink="/driver/notification" class="w-80 !h-11 !bg-black !text-white"
+          (click)="goOnline()">
+          Go Online
+        </button>
+        <button mat-raised-button color="primary" routerLink="/home" class="w-80 !h-11 !bg-black !text-white"
+          (click)="goOffline()">
+          Go Offline
+        </button>
+      }
+      @if(authService.isDriver && !authService.isdriverApproved){
+         <div class="rounded-md bg-white p-1 ">
+        <Strong class="text-2xl text-red-600 underline">Wait For Your Approval to Use Further Features (Re-Login after 24 hours).</Strong>
+        <p class="text-2xl font-bold">Status : <strong class="text-2xl text-red-600 underline">{{localdriver.status}}</strong></p>
+        </div>
+      }
+      </div>
+
+      <!-- 🖼️ Right Side Image -->
+      <div class="flex-1 w-full min-h-[300px] bg-cover bg-center"
+        style="background-image: url('https://media.istockphoto.com/id/1125811217/vector/mobile-phone-and-car.jpg?s=612x612&w=0&k=20&c=T7rtwEHISIbEqjlb-9pHRsNDrN4A9lupRlgn_ceo22A=')">
+      </div>
+    </div>
+  </div>
+</div>
+</body>

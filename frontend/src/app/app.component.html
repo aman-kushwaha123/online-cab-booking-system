@@ -1,0 +1,76 @@
+<body class="w-full h-full flex flex-col">
+  <mat-sidenav-container class="h-screen w-screen ">
+  <!-- Side Nav -->
+
+  <mat-sidenav #sidenav mode="side" closed class=" !bg-black p-4 !w-52">
+    <!-- Side nav content -->
+    @if(authService.isLoggedIn){
+    <nav class="flex flex-col space-y-4 text-xl text-white w-40  h-full items-center pt-20 ">
+
+       @if(authService.isDriver){
+      <a routerLink="/driver/profile" routerLinkActive="text-yellow-300" class="cursor-pointer hover:underline"
+        (click)="sidenav.close()">Driver Profile</a>
+      }
+      @else{
+      <a routerLink="/profile" routerLinkActive="text-yellow-300" class="cursor-pointer hover:underline"
+        (click)="sidenav.close()">Profile</a>
+      }
+      <a routerLink="/home" class="cursor-pointer hover:underline"
+        (click)="sidenav.close()">Home</a>
+      @if(!authService.isDriver){
+      <a routerLink="/getride"  class="cursor-pointer hover:underline"
+        (click)="sidenav.close()">Get Ride</a>
+      <a routerLink="/bookings"  class="cursor-pointer hover:underline"
+        (click)="sidenav.close()">Bookings</a>
+      }
+      @if(authService.isAdmin){
+      <a routerLink="/admin/dashboard" class="cursor-pointer hover:underline" (click)="sidenav.close()">Admin
+        DashBoard</a>
+      }
+      @if(authService.isDriver && authService.isdriverApproved){
+      <a routerLink="/driver/notification" class="cursor-pointer hover:underline"
+        (click)="sidenav.close();">Notification</a>
+      }
+      <a routerLink="/" class="cursor-pointer hover:underline" (click)="sidenav.close(); authService.logout();">Log out</a>
+
+    </nav>
+  }
+  </mat-sidenav>
+
+  <!-- Main Content Area -->
+  <!-- Header at the top -->
+  <mat-sidenav-content class="bg-gray-100 flex flex-col">
+    <!-- Optional Top Header -->
+    <mat-toolbar class="px-4 shadow-md !bg-black !text-white flex justify-between">
+      <div class="flex flex-row gap-4">
+        @if(authService.isLoggedIn){
+        <button mat-icon-button (click)="sidenav?.toggle()" class="mr-2 md:hidden ">
+          <mat-icon class="!text-white">menu</mat-icon>
+        </button>
+      }
+        <div class="mt-1 ">
+          <span class="mb-3 hover:underline hover:cursor-pointer" routerLink="/home">AKGo</span>
+        </div>
+      </div>
+      <div class="">
+        <p><strong>{{authService.getname()}}</strong></p>
+      </div>
+    </mat-toolbar>
+
+    <!-- Routed Pages -->
+   <!-- Main content wrapper, apply blur when loading -->
+    <main class="flex-grow">
+      <router-outlet></router-outlet>
+    </main>
+
+   
+
+    <!-- Footer at the bottom -->
+    <footer class="bg-black text-gray-300 py-6 px-4 ">
+      <app-footer></app-footer>
+    </footer>
+
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
+</body>
